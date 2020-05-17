@@ -1,0 +1,10 @@
+{
+    "App_Name": "APP NAME",
+    "Login":{
+    "Login":"Login",
+    "UserNamePlaceholder":"UserName",
+    "PasswordPlaceholder":"Password",
+    "UserNameRequired":"UserName is required",
+    "PasswordRequired":"Password is required"
+   } 
+}
