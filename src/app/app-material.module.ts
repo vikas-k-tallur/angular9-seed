@@ -11,8 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table/table-data-source';
-
-
+import {MatSortModule} from '@angular/material/sort';
 
 
 const modules = [
@@ -24,6 +23,7 @@ const modules = [
     MatToolbarModule,
     MatListModule,
     MatTableModule,
+    MatSortModule,
     MatPaginatorModule
     
 ];
