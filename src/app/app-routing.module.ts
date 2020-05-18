@@ -15,6 +15,8 @@ import { MasterLayoutComponent } from './layout/master-layout/master-layout.comp
 //   { path: '**', component: NoPageFoundComponent }
 // ]);
 const routes: Routes = [
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },  
   {
     path: '',
     component: MasterLayoutComponent,
@@ -22,9 +24,8 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent, pathMatch: 'full', canActivate:[AuthenticationGuard] },
     ]
   },
-  { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: NoPageFoundComponent }
+  
 ];
 
 @NgModule({

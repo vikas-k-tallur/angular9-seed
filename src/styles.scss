@@ -15,3 +15,9 @@ body {
   float: right;
   margin: 8px;
 }
+
+mat-dialog-container#modal-component {
+  border: 3px solid #262626;
+  border-radius: 11px;
+  background-color: #673ab7;
+}

@@ -43,7 +43,8 @@ export class AuthenticationService {
     this.router.navigateByUrl('/login');
   }
   logout():void{
-    this.isUserLoggedIn=false;
+    sessionStorage.clear();
+    this.isUserLoggedIn=false;    
     this.router.navigateByUrl('/login');
   }
 }

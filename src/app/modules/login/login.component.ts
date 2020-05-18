@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/authentication/authentication.service';
 import { first } from 'rxjs/operators';
+import { CommonUtilityService } from '@shared/services/common-utility.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,7 +13,9 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   isSubmitted = false;
-  constructor(private router: Router, private formBuilder: FormBuilder,
+  constructor(private router: Router,
+    private formBuilder: FormBuilder,
+    private commonUtilityService: CommonUtilityService,
     private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
@@ -35,6 +38,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data);
+          this.commonUtilityService.startIdleWatch.next(true);
           this.router.navigateByUrl('/home');
         },
         error => {
