@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table/table-data-source';
 import {MatSortModule} from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 const modules = [
@@ -24,7 +25,8 @@ const modules = [
     MatListModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
     
 ];
 
