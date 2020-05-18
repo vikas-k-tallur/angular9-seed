@@ -19,7 +19,7 @@ const routes: Routes = [
     path: '',
     component: MasterLayoutComponent,
     children: [
-      { path: 'home', component: HomeComponent, pathMatch: 'full' },
+      { path: 'home', component: HomeComponent, pathMatch: 'full', canActivate:[AuthenticationGuard] },
     ]
   },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
