@@ -20,7 +20,7 @@ import { ResponseInterceptor } from '@app/interceptor/response.interceptor';
 
 
 import { LoginComponent, HomeComponent, NoPageFoundComponent } from './modules';
-import { MasterLayoutComponent,HeaderComponent,ModalComponent } from './layout'
+import { MasterLayoutComponent,HeaderComponent,ModalComponent, LoaderComponent } from './layout'
 
 
 // AOT compilation support
@@ -55,7 +55,8 @@ export function httpTranslateLoader(http: HttpClient) {
     NoPageFoundComponent,
     MasterLayoutComponent,
     HeaderComponent,
-    ModalComponent
+    ModalComponent,
+    LoaderComponent
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:RequestInterceptor,multi:true},

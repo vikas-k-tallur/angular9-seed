@@ -20,4 +20,6 @@
      <input type="submit" value="{{'Login.Login' | translation}}">
       
     </form>
+   
   </div>
+  <app-loader overlay="true" *ngIf="isLoading"></app-loader>
