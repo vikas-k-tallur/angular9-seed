@@ -1,6 +1,7 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { LoggerService } from './logger/logger.service';
 
 
 
@@ -10,7 +11,8 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     TranslateModule
   ],
-  declarations: []
+  declarations: [],
+  providers:[LoggerService]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

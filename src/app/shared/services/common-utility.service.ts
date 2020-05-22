@@ -26,14 +26,7 @@ export class CommonUtilityService {
     JSON.parse(this.securityUtilityService.get(this.userSessionKey,value)):null;
    }
 
-   sleep(milliseconds:number):void {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-      currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
-  }
-
+  
   sleepWithPromise(milliseconds:number):Promise<any> {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
   }

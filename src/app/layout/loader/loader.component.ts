@@ -17,7 +17,7 @@ export class LoaderComponent implements OnInit {
   @Input() overlay: boolean = false;
   @Input() color: string = "primary";
   ngOnInit(): void {
-    console.log("spinner")
+    
   }
 
 }

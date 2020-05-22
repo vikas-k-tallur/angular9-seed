@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/authentication/authentication.service';
 import { first, finalize } from 'rxjs/operators';
 import { CommonUtilityService } from '@shared/services/common-utility.service';
+import { LoggerService } from '@app/logger/logger.service';
+import { User } from 'app/models';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,6 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private commonUtilityService: CommonUtilityService,
+    private logger:LoggerService,
     private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
@@ -32,7 +35,7 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.isSubmitted = true;
     if (this.loginForm.invalid) {
-      this.commonUtilityService.sleepWithPromise(1000).then(() => {
+      this.commonUtilityService.sleepWithPromise(500).then(() => {
         this.isLoading = false;
         return;
       })
@@ -48,13 +51,13 @@ export class LoginComponent implements OnInit {
               this.isSubmitted = false;
             }))
           .subscribe(
-            data => {
-              console.log(data);
+            (user:User) => {
+              this.logger.log(user.username+" logged in.");
               this.commonUtilityService.startIdleWatch.next(true);
               this.router.navigateByUrl('/home');
             },
-            error => {
-
+            (error:any) => {
+              this.logger.error(error.message,)
             });
       });
     }

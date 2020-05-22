@@ -31,13 +31,13 @@ export class AppComponent {
       const idleInterrupts = [new DocumentInterruptSource('click DOMMouseScroll touchmove scroll'),
       new StorageInterruptSource()]
       this.idle.setInterrupts(idleInterrupts);
-      this.idle.onIdleEnd.subscribe(() => {      
+      this.idle.onIdleEnd.subscribe(() => {
       });
-      this.idle.onIdleStart.subscribe(() => {        
+      this.idle.onIdleStart.subscribe(() => {
         this.openLogoutModal();
       });
-      this.idle.onTimeoutWarning.subscribe((countdown: any) => {        
-          this.commonUtilityService.timeoutData.next(countdown); 
+      this.idle.onTimeoutWarning.subscribe((countdown: any) => {
+        this.commonUtilityService.timeoutData.next(countdown);
       });
       this.idle.onTimeout.subscribe(() => {
         this.closeLogoutModal();
@@ -48,8 +48,8 @@ export class AppComponent {
   }
 
   startToWatch() {
-    this.commonUtilityService.startIdleWatch.subscribe((isWatch: boolean)=>{
-      if(isWatch) {
+    this.commonUtilityService.startIdleWatch.subscribe((isWatch: boolean) => {
+      if (isWatch) {
         this.idle.watch();
       }
     })
@@ -66,7 +66,7 @@ export class AppComponent {
     dialogConfig.data = {
       name: "logout",
       title: "Are you sure you want to logout?",
-      description:"",
+      description: "",
       baseDescription: "Your session is about to expire in ",
       actionButtonText: "Logout",
       closeButtonText: "Continue",
