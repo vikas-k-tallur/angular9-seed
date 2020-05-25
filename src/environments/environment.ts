@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,  
-  apiUrl: 'http://localhost:5000',
+  apiUrl: 'http://localhost:8101/',
   apiKey:"1234567890abcdef",
   enableAutoLogout:true,
   idleConfiguration:{'idleTime':120,'timeout':120},

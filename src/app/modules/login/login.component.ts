@@ -6,6 +6,7 @@ import { first, finalize } from 'rxjs/operators';
 import { CommonUtilityService } from '@shared/services/common-utility.service';
 import { LoggerService } from '@app/logger/logger.service';
 import { User } from 'app/models';
+import { environment } from '@env';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private commonUtilityService: CommonUtilityService,
-    private logger:LoggerService,
+    private logger: LoggerService,
     private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
@@ -51,13 +52,19 @@ export class LoginComponent implements OnInit {
               this.isSubmitted = false;
             }))
           .subscribe(
-            (user:User) => {
-              this.logger.log(user.username+" logged in.");
+            (data: any) => {
+              let user: User = data.userData;
+              this.logger.log(user.username + " logged in.");
+              console.log(user);
+              this.authenticationService.setIsUserLoggedIn(true);
+              if (environment.enablePersistentSessionOnRefresh) {
+                this.commonUtilityService.setUserSession(user)
+              }
               this.commonUtilityService.startIdleWatch.next(true);
               this.router.navigateByUrl('/home');
             },
-            (error:any) => {
-              this.logger.error(error.message,)
+            (error: any) => {
+              this.logger.error(error.message)
             });
       });
     }

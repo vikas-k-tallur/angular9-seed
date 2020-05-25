@@ -21,7 +21,7 @@ export class RequestInterceptor implements HttpInterceptor {
       : request.url + "&" + queryString;
     
     
-    const isUserLoggerIn = true;
+    const isUserLoggerIn = this.authenticationService.isAuthenticated();
     //pass Authorization or custom header for every request if user is authenticated
     if (isUserLoggerIn) {      
       request = request.clone({

@@ -1,50 +1,52 @@
 import { Injectable } from '@angular/core';
-import { Observable,of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from '../../models';
 import { Router } from '@angular/router';
 import { environment } from '@env';
 import { CommonUtilityService } from '@shared/services/common-utility.service';
+import { HttpClient } from '@angular/common/http';
 
+const loginRoute:string="login"
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  user:User;
-  isUserLoggedIn:boolean=false;
-  constructor(private router: Router,private commonUtilityService:CommonUtilityService) { }
-  get getAuthToken():string{
-    return this.user?this.user.token:null;
+  user: User;
+  isUserLoggedIn: boolean = false;
+  constructor(private router: Router,
+    private commonUtilityService: CommonUtilityService,
+    private http: HttpClient) { }
+  get getAuthToken(): string {
+    return this.user ? this.user.token : null;
   }
-  
-  isAuthenticated():boolean{
-    if(!this.isUserLoggedIn && environment.enablePersistentSessionOnRefresh){
-      this.user=this.commonUtilityService.getUserSession
-      this.isUserLoggedIn=!!this.user?!!this.user.token:false;
+
+  setIsUserLoggedIn(isUserLoggedIn:boolean){
+    this.isUserLoggedIn = isUserLoggedIn;
+  }
+  isAuthenticated(): boolean {
+    if (!this.isUserLoggedIn && environment.enablePersistentSessionOnRefresh) {
+      this.user = this.commonUtilityService.getUserSession
+      this.isUserLoggedIn = !!this.user ? !!this.user.token : false;
     }
     return this.isUserLoggedIn;
   }
-  login(username:string,password:string):Observable<User>{     
-    this.isUserLoggedIn=true;    
-    var userResponseForValidUser= {
-      id:'user101',
+  login(username: string, password: string): Observable<any> {
+    
+    let loginFormData = {
       username: username,
-      password: password,
-      firstName: "Guest",
-      lastName: "User",
-      token: "Bearer Token-String"
-    }
-    if(environment.enablePersistentSessionOnRefresh){
-      this.commonUtilityService.setUserSession(userResponseForValidUser)
-    }
-    return of(userResponseForValidUser);
+      password: password
+    };
+    return this.http.post(environment.apiUrl+loginRoute,JSON.stringify(loginFormData))
+    
+    
   }
-  navigateToLogin(){
+  navigateToLogin() {
     this.router.navigateByUrl('/login');
   }
-  logout():void{
+  logout(): void {
     sessionStorage.clear();
-    this.isUserLoggedIn=false;    
+    this.isUserLoggedIn = false;
     this.router.navigateByUrl('/login');
   }
 }
